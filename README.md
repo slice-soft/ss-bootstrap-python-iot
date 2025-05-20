@@ -19,7 +19,7 @@ Este repositorio contiene un agente simple que:
 En tu Raspberry Pi (con Raspberry Pi OS Lite), ejecuta:
 
 ```bash
-wget -O - https://raw.githubusercontent.com/tuusuario/ss-bootstrap-python-iot/main/install.sh | bash
+wget -O - https://raw.githubusercontent.com/slice-soft/ss-bootstrap-python-iot/main/install.sh | bash
 ```
 
 🔧 Esto hará:

@@ -1,7 +1,7 @@
 #!/bin/bash
 
 cd ~
-git clone https://github.com/tuusuario/raspi-vehiculo-bootstrap app
+git clone https://github.com/slice-soft/raspi-vehiculo-bootstrap app
 cd app
 chmod +x *.sh
 ./run.sh
