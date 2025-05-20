@@ -1,4 +1,4 @@
 #!/bin/bash
-cd /home/pi/app
+cd "$HOME/ss-bootstrap-python-iot"
 python3 run.py &
-echo $! > /tmp/app.pid
+echo $! > "$HOME/ss-bootstrap-python-iot/pid"
