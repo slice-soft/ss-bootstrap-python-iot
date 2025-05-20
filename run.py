@@ -1,7 +1,10 @@
 from datetime import datetime
 import time
+import os
+
+log_path = os.path.join(os.environ["HOME"], "ss-bootstrap-python-iot", "log.txt")
 
 while True:
-    with open("/home/pi/app/sistema.log", "a") as f:
+    with open(log_path, "a") as f:
         f.write(f"[{datetime.now()}] ✅ Sistema en ejecución\n")
     time.sleep(60)
