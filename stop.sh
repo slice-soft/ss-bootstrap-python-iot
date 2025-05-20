@@ -1,2 +1,3 @@
 #!/bin/bash
-[ -f /tmp/app.pid ] && kill $(cat /tmp/app.pid) && rm /tmp/app.pid
+PID_FILE="$HOME/ss-bootstrap-python-iot/pid"
+[ -f "$PID_FILE" ] && kill $(cat "$PID_FILE") && rm "$PID_FILE"
