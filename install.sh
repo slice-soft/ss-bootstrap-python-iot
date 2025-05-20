@@ -1,7 +1,7 @@
 #!/bin/bash
 
 cd "$HOME"
-git clone git clone https://github.com/slice-soft/ss-bootstrap-python-iot app app
+git clone git clone https://github.com/slice-soft/ss-bootstrap-python-iot app
 cd app
 chmod +x *.sh
 ./run.sh
