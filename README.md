@@ -45,14 +45,18 @@ tail -f /home/pi/app/sistema.log
 
 ## 📁 Archivos principales
 
-| Archivo        | Propósito                                      |
-|----------------|-----------------------------------------------|
-| `run.py`       | Script principal con la lógica de ejecución    |
-| `run.sh`       | Inicia el script y guarda el PID               |
-| `stop.sh`      | Detiene el proceso si está en ejecución        |
-| `updater.sh`   | Verifica cambios en el repositorio y reinicia |
-| `install.sh`   | Script que automatiza todo el setup inicial    |
-| `.gitignore`   | Ignora archivos de log y PID                   |
+| Archivo                  | Propósito                                             |
+|--------------------------|------------------------------------------------------|
+| `run.py`                 | Script principal con la lógica de ejecución          |
+| `run.sh`                 | Inicia el script y guarda el PID                     |
+| `stop.sh`                | Detiene el proceso si está en ejecución              |
+| `updater.sh`             | Verifica cambios en el repositorio y reinicia        |
+| `install.sh`             | Script que automatiza todo el setup inicial          |
+| `setup-mac-service.sh`   | Configura el servicio de agente en macOS             |
+| `setup-linux-service.sh` | Configura el servicio de agente en Linux (systemd)   |
+| `stop-mac-service.sh`    | Detiene y elimina el servicio macOS                  |
+| `stop-linux-service.sh`  | Detiene y elimina el servicio systemd en Linux       |
+| `.gitignore`             | Ignora archivos de log y PID                         |
 
 ---
 
@@ -86,3 +90,15 @@ Este repositorio está diseñado para ser extendido con:
 ## 📄 Licencia
 
 MIT — este proyecto es libre de usar, modificar y compartir.
+
+---
+
+## 🛠️ Scripts opcionales de mantenimiento
+
+Estos scripts pueden ser útiles durante pruebas manuales:
+
+- `stop.sh`: Detiene el proceso principal si fue iniciado manualmente
+- `stop-mac-service.sh`: Elimina el servicio en macOS (`launchctl`)
+- `stop-linux-service.sh`: Elimina el servicio de usuario en Linux (`systemctl --user`)
+
+⚠️ En producción no suelen usarse, ya que `updater.sh` reinicia correctamente el servicio al detectar cambios.
