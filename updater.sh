@@ -16,7 +16,6 @@ if [ "$OLD" != "$NEW" ]; then
     launchctl start com.slice.soft.ss-bootstrap
   elif [[ "$OS_TYPE" == "Linux" ]]; then
     echo "$timestamp ♻️ Reiniciando servicio Linux..."
-    # Evitar errores si no hay sesión activa (como en cron)
     export XDG_RUNTIME_DIR="/run/user/$(id -u)"
     if loginctl show-user "$USER" >/dev/null 2>&1; then
       systemctl --user restart ss-bootstrap || echo "$timestamp ⚠️ No se pudo reiniciar. Probablemente no hay sesión activa."
