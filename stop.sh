@@ -2,20 +2,20 @@
 
 PID_FILE="$HOME/ss-bootstrap-python-iot/pid"
 
-# Detectar sistema operativo
 OS_TYPE="$(uname)"
 
-# Verificar si el servicio está instalado
 if [[ "$OS_TYPE" == "Darwin" ]]; then
   if launchctl list | grep -q "com.slice.soft.ss-bootstrap"; then
     echo "🛑 Deteniendo servicio macOS..."
     "$HOME/ss-bootstrap-python-iot/stop-mac-service.sh"
-    exit 0
   fi
 elif [[ "$OS_TYPE" == "Linux" ]]; then
   if systemctl --user list-units --type=service | grep -q "ss-bootstrap.service"; then
     echo "🛑 Deteniendo servicio systemd de usuario en Linux..."
     "$HOME/ss-bootstrap-python-iot/stop-linux-service.sh"
-    exit 0
   fi
 fi
+
+CRON_LINE="$HOME/ss-bootstrap-python-iot/updater.sh"
+crontab -l 2>/dev/null | grep -v "$CRON_LINE" | crontab -
+echo "🧼 Entrada de crontab para updater.sh eliminada"
