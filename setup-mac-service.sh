@@ -2,10 +2,10 @@
 
 PLIST_NAME="com.slice.soft.ss-bootstrap.plist"
 PLIST_PATH="$HOME/Library/LaunchAgents/$PLIST_NAME"
-RUN_SCRIPT="$HOME/ss-bootstrap-python-iot/run.sh"
+PYTHON_EXEC="/usr/bin/python3"
+PYTHON_SCRIPT="$HOME/ss-bootstrap-python-iot/run.py"
 LOG_PATH="$HOME/ss-bootstrap-python-iot/log.txt"
 
-# Crear el .plist
 cat > "$PLIST_PATH" <<EOF
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE plist PUBLIC "-//Apple Computer//DTD PLIST 1.0//EN"
@@ -17,7 +17,8 @@ cat > "$PLIST_PATH" <<EOF
 
   <key>ProgramArguments</key>
   <array>
-    <string>$RUN_SCRIPT</string>
+    <string>$PYTHON_EXEC</string>
+    <string>$PYTHON_SCRIPT</string>
   </array>
 
   <key>WorkingDirectory</key>
@@ -30,17 +31,12 @@ cat > "$PLIST_PATH" <<EOF
 
   <key>RunAtLoad</key>
   <true/>
-
   <key>KeepAlive</key>
   <true/>
 </dict>
 </plist>
 EOF
 
-# Dar permisos de ejecución por si acaso
-chmod +x "$RUN_SCRIPT"
-
-# Recargar y cargar el agente
 launchctl unload "$PLIST_PATH" 2>/dev/null
 launchctl load "$PLIST_PATH"
 
