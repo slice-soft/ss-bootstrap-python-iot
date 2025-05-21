@@ -1,7 +1,7 @@
 from datetime import datetime
 import time
 import os
-VERSION = "V0.0.2"
+VERSION = "V0.0.3"
 
 log_path = os.path.join(os.environ["HOME"], "ss-bootstrap-python-iot", "ss-bootstrap.log")
 
