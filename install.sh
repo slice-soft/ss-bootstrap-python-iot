@@ -14,4 +14,8 @@ fi
 find "$INSTALL_DIR" -maxdepth 1 -name "*.sh" -exec chmod +x {} \;
 # ejecutar el script de instalación
 "$INSTALL_DIR/run.sh"
-(crontab -l 2>/dev/null; echo "*/5 * * * * $HOME/ss-bootstrap-python-iot/updater.sh >> $HOME/ss-bootstrap-python-iot/update.log 2>&1") | crontab -
+CRON_JOB="*/5 * * * * $INSTALL_DIR/updater.sh >> $INSTALL_DIR/update.log 2>&1"
+(crontab -l 2>/dev/null | grep -F "$INSTALL_DIR/updater.sh") >/dev/null 2>&1 || (
+  (crontab -l 2>/dev/null; echo "$CRON_JOB") | crontab -
+  echo "🕔 Cron registrado para updater.sh cada 5 minutos"
+)
