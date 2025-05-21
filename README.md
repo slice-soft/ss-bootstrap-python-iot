@@ -16,29 +16,31 @@ Este repositorio contiene un agente simple que:
 
 ## 🚀 Instalación rápida
 
-En tu Raspberry Pi (con Raspberry Pi OS Lite), ejecuta:
+En tu Raspberry Pi (con Raspberry Pi OS Lite) o cualquier sistema Linux, ejecuta:
 
 ```bash
 wget -O - https://raw.githubusercontent.com/slice-soft/ss-bootstrap-python-iot/main/install.sh | bash
 ```
 
 🔧 Esto hará:
-1. Clonar el repositorio en `/home/pi/app`
+1. Clonar el repositorio en tu carpeta de usuario (`$HOME/ss-bootstrap-python-iot`)
 2. Dar permisos de ejecución a los scripts
-3. Ejecutar el script `run.py`
+3. Ejecutar el script `run.py` como servicio
 4. Registrar el actualizador en `crontab` cada 5 minutos
+
+> ⚠️ **Nota:** El soporte para macOS está en desarrollo y no es prioritario, ya que el enfoque principal es Raspberry Pi y sistemas Linux.
 
 ---
 
 ## 🧠 ¿Qué hace el agente?
 
 Cada minuto:
-- Escribe una línea en `/home/pi/app/sistema.log`
+- Escribe una línea en `$HOME/ss-bootstrap-python-iot/ss-bootstrap.log`
 - Simula actividad de un dispositivo conectado
 - Puedes monitorear el log con:
 
 ```bash
-tail -f /home/pi/app/sistema.log
+tail -f ~/ss-bootstrap-python-iot/ss-bootstrap.log
 ```
 
 ---
@@ -48,7 +50,7 @@ tail -f /home/pi/app/sistema.log
 | Archivo                  | Propósito                                             |
 |--------------------------|------------------------------------------------------|
 | `run.py`                 | Script principal con la lógica de ejecución          |
-| `run.sh`                 | Inicia el script y guarda el PID                     |
+| `run.sh`                 | Inicia el script y configura el servicio             |
 | `stop.sh`                | Detiene el proceso si está en ejecución              |
 | `updater.sh`             | Verifica cambios en el repositorio y reinicia        |
 | `install.sh`             | Script que automatiza todo el setup inicial          |
@@ -62,18 +64,18 @@ tail -f /home/pi/app/sistema.log
 
 ## 🛠️ Requisitos
 
-- Raspberry Pi OS Lite (32-bit)
+- Raspberry Pi OS Lite (32-bit) o cualquier distribución Linux moderna
 - Python 3
 - Acceso a internet por Wi-Fi o Ethernet
 - Git instalado (ya viene por defecto en la imagen oficial)
 
 ---
 
-## ✅ Ejemplo de salida (`sistema.log`)
+## ✅ Ejemplo de salida (`ss-bootstrap.log`)
 
 ```
-[2025-05-20 14:10:01] ✅ Sistema en ejecución
-[2025-05-20 14:11:01] ✅ Sistema en ejecución
+[2025-05-20 14:10:01] ✅ Sistema en ejecución V0.0.3
+[2025-05-20 14:11:01] ✅ Sistema en ejecución V0.0.3
 ```
 
 ---
