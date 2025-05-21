@@ -1,8 +1,8 @@
 #!/bin/bash
 cd "$HOME/ss-bootstrap-python-iot"
 
-git reset --hard HEAD
-git clean -fd
+git reset --hard HEAD >/dev/null 2>&1
+git clean -fd >/dev/null 2>&1
 
 OLD=$(git rev-parse HEAD)
 git pull origin main >/dev/null 2>&1
