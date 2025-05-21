@@ -16,7 +16,8 @@ if [ "$OLD" != "$NEW" ]; then
     launchctl start com.slice.soft.ss-bootstrap
   elif [[ "$OS_TYPE" == "Linux" ]]; then
     echo "$timestamp ♻️ Reiniciando servicio Linux..."
-    systemctl --user restart ss-bootstrap
+    loginctl enable-linger "$USER"
+    systemctl --user restart ss-bootstrap || echo "⚠️ No se pudo reiniciar. Probablemente no hay sesión activa."
   else
     echo "$timestamp ❌ Sistema no soportado para reinicio automático"
   fi
