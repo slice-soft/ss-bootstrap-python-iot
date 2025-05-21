@@ -7,9 +7,19 @@ NEW=$(git rev-parse HEAD)
 timestamp="[$(date '+%Y-%m-%d %H:%M:%S')]"
 
 if [ "$OLD" != "$NEW" ]; then
-  echo "$timestamp 🔁 Actualización detectada. Reiniciando..."
-  ./stop.sh
-  ./run.sh
+  echo "$timestamp 🔁 Actualización detectada."
+
+  OS_TYPE="$(uname)"
+  if [[ "$OS_TYPE" == "Darwin" ]]; then
+    echo "$timestamp ♻️ Reiniciando servicio macOS..."
+    launchctl stop com.slice.soft.ss-bootstrap
+    launchctl start com.slice.soft.ss-bootstrap
+  elif [[ "$OS_TYPE" == "Linux" ]]; then
+    echo "$timestamp ♻️ Reiniciando servicio Linux..."
+    systemctl --user restart ss-bootstrap
+  else
+    echo "$timestamp ❌ Sistema no soportado para reinicio automático"
+  fi
 else
   echo "$timestamp ✅ Sin cambios"
 fi
