@@ -1,5 +1,9 @@
 #!/bin/bash
 cd "$HOME/ss-bootstrap-python-iot"
+
+git reset --hard HEAD
+git clean -fd
+
 OLD=$(git rev-parse HEAD)
 git pull origin main >/dev/null 2>&1
 NEW=$(git rev-parse HEAD)
@@ -21,7 +25,7 @@ if [ "$OLD" != "$NEW" ]; then
     if loginctl show-user "$USERNAME" >/dev/null 2>&1; then
       systemctl --user restart ss-bootstrap || echo "$timestamp ⚠️ No se pudo reiniciar. Probablemente no hay sesión activa."
     else
-      echo "$timestamp ⚠️ No hay sesión activa para $USER. Reinicio fallido."
+      echo "$timestamp ⚠️ No hay sesión activa para $USERNAME. Reinicio fallido."
     fi
   else
     echo "$timestamp ❌ Sistema no soportado para reinicio automático"

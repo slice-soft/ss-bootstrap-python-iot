@@ -4,7 +4,7 @@ PLIST_NAME="com.slice.soft.ss-bootstrap.plist"
 PLIST_PATH="$HOME/Library/LaunchAgents/$PLIST_NAME"
 PYTHON_EXEC="/usr/bin/python3"
 PYTHON_SCRIPT="$HOME/ss-bootstrap-python-iot/run.py"
-LOG_PATH="$HOME/ss-bootstrap-python-iot/log.txt"
+LOG_PATH="$HOME/ss-bootstrap-python-iot/ss-bootstrap.log"
 
 cat > "$PLIST_PATH" <<EOF
 <?xml version="1.0" encoding="UTF-8"?>

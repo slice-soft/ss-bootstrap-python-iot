@@ -1,7 +1,5 @@
 #!/bin/bash
 
-PID_FILE="$HOME/ss-bootstrap-python-iot/pid"
-
 OS_TYPE="$(uname)"
 
 if [[ "$OS_TYPE" == "Darwin" ]]; then

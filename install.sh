@@ -13,7 +13,7 @@ fi
 
 find "$INSTALL_DIR" -maxdepth 1 -name "*.sh" -exec chmod +x {} \;
 "$INSTALL_DIR/run.sh"
-CRON_JOB="*/5 * * * * bash $INSTALL_DIR/updater.sh >> $INSTALL_DIR/update.log 2>&1"
+CRON_JOB="*/5 * * * * bash $INSTALL_DIR/updater.sh >> $INSTALL_DIR/ss-bootstrap-events.log 2>&1"
 (crontab -l 2>/dev/null | grep -F "bash $INSTALL_DIR/updater.sh") >/dev/null 2>&1 || (
   (crontab -l 2>/dev/null; echo "$CRON_JOB") | crontab -
   echo "🕔 Cron registrado para updater.sh cada 5 minutos"

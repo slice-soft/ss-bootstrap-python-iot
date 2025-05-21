@@ -5,7 +5,7 @@ SYSTEMD_USER_DIR="$HOME/.config/systemd/user"
 SERVICE_FILE="$SYSTEMD_USER_DIR/$SERVICE_NAME.service"
 PYTHON_EXEC="/usr/bin/python3"
 PYTHON_SCRIPT="$HOME/ss-bootstrap-python-iot/run.py"
-LOG_PATH="$HOME/ss-bootstrap-python-iot/log.txt"
+LOG_PATH="$HOME/ss-bootstrap-python-iot/ss-bootstrap.log"
 
 mkdir -p "$SYSTEMD_USER_DIR"
 
