@@ -2,13 +2,25 @@
 
 cd "$HOME/ss-bootstrap-python-iot"
 
-# Verificar si ya hay un proceso corriendo
-if [ -f pid ] && ps -p $(cat pid) > /dev/null 2>&1; then
-  echo "⚠️  El proceso ya está en ejecución con PID $(cat pid)."
+OS_TYPE="$(uname)"
+
+if [[ "$OS_TYPE" == "Darwin" ]]; then
+  PLIST_PATH="$HOME/Library/LaunchAgents/com.slice.soft.ss-bootstrap.plist"
+  if [ ! -f "$PLIST_PATH" ]; then
+    echo "🛠️ Configurando servicio macOS..."
+    ./setup-mac-service.sh
+  fi
+  echo "🟢 Servicio macOS ya está instalado. Ejecutándose o se iniciará al reiniciar sesión."
+  exit 0
+elif [[ "$OS_TYPE" == "Linux" ]]; then
+  SERVICE_FILE="$HOME/.config/systemd/user/ss-bootstrap.service"
+  if [ ! -f "$SERVICE_FILE" ]; then
+    echo "🛠️ Configurando servicio systemd de usuario en Linux..."
+    ./setup-linux-service.sh
+  fi
+  echo "🟢 Servicio Linux ya está instalado. Ejecutándose o se iniciará con el sistema."
+  exit 0
+else
+  echo "❌ Sistema operativo no soportado: $OS_TYPE"
   exit 1
 fi
-
-# Ejecutar el script y guardar el nuevo PID
-python3 run.py &
-echo $! > pid
-echo "✅ run.py iniciado con PID $(cat pid)"
