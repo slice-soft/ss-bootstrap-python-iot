@@ -12,5 +12,6 @@ else
 fi
 
 find "$INSTALL_DIR" -maxdepth 1 -name "*.sh" -exec chmod +x {} \;
-./run.sh
+# ejecutar el script de instalación
+"$INSTALL_DIR/run.sh"
 (crontab -l 2>/dev/null; echo "*/5 * * * * $HOME/ss-bootstrap-python-iot/updater.sh >> $HOME/ss-bootstrap-python-iot/update.log 2>&1") | crontab -
