@@ -12,7 +12,7 @@ else
 fi
 
 find "$INSTALL_DIR" -maxdepth 1 -name "*.sh" -exec chmod +x {} \;
-# ejecutar el script de instalación
+"$INSTALL_DIR/run.sh"
 CRON_JOB="*/5 * * * * bash $INSTALL_DIR/updater.sh >> $INSTALL_DIR/update.log 2>&1"
 (crontab -l 2>/dev/null | grep -F "bash $INSTALL_DIR/updater.sh") >/dev/null 2>&1 || (
   (crontab -l 2>/dev/null; echo "$CRON_JOB") | crontab -
