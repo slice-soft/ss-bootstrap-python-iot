@@ -7,5 +7,5 @@ log_path = os.path.join(os.environ["HOME"], "ss-bootstrap-python-iot", "ss-boots
 
 while True:
     with open(log_path, "a") as f:
-        f.write(f"[{datetime.now()}] ✅ Sistema en ejecución {VERSION}\n")
+        f.write(f"[{datetime.now()}] ✅ System running {VERSION}\n")
     time.sleep(60)

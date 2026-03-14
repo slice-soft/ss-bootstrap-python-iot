@@ -1,43 +1,43 @@
 # ss-bootstrap-python-iot
 
-Sistema de arranque automático para Raspberry Pi Zero W y otros dispositivos embebidos, desarrollado por [SliceSoft](https://github.com/slicesoft) como base para pruebas de automatización, actualización remota y ejecución continua de lógica IoT en Python.
+Automatic bootstrap system for Raspberry Pi Zero W and other embedded devices, built by [SliceSoft](https://github.com/slicesoft) as a base for automation testing, remote updates, and continuous execution of IoT logic in Python.
 
 ---
 
-## 📦 Descripción
+## Description
 
-Este repositorio contiene un agente simple que:
+This repository contains a simple agent that:
 
-- Ejecuta una tarea periódica (registro en log)
-- Se puede iniciar automáticamente con un solo comando
-- Incluye lógica de actualización automática vía `git pull`
+- Runs a periodic task (logged to a file)
+- Can be started automatically with a single command
+- Includes automatic update logic via `git pull`
 
 ---
 
-## 🚀 Instalación rápida
+## Quick Installation
 
-En tu Raspberry Pi (con Raspberry Pi OS Lite) o cualquier sistema Linux, ejecuta:
+On your Raspberry Pi (running Raspberry Pi OS Lite) or any Linux system, run:
 
 ```bash
 wget -O - https://raw.githubusercontent.com/slice-soft/ss-bootstrap-python-iot/main/install.sh | bash
 ```
 
-🔧 Esto hará:
-1. Clonar el repositorio en tu carpeta de usuario (`$HOME/ss-bootstrap-python-iot`)
-2. Dar permisos de ejecución a los scripts
-3. Ejecutar el script `run.py` como servicio
-4. Registrar el actualizador en `crontab` cada 5 minutos
+🔧 This will:
+1. Clone the repository into your home directory (`$HOME/ss-bootstrap-python-iot`)
+2. Grant execute permissions to the scripts
+3. Run `run.py` as a service
+4. Register the updater in `crontab` every 5 minutes
 
-> ⚠️ **Nota:** El soporte para macOS está en desarrollo y no es prioritario, ya que el enfoque principal es Raspberry Pi y sistemas Linux.
+> ⚠️ **Note:** macOS support is still under development and is not a priority, since the main target is Raspberry Pi and Linux systems.
 
 ---
 
-## 🧠 ¿Qué hace el agente?
+## What Does the Agent Do?
 
-Cada minuto:
-- Escribe una línea en `$HOME/ss-bootstrap-python-iot/ss-bootstrap.log`
-- Simula actividad de un dispositivo conectado
-- Puedes monitorear el log con:
+Every minute it:
+- Writes a line to `$HOME/ss-bootstrap-python-iot/ss-bootstrap.log`
+- Simulates activity from a connected device
+- Can be monitored with:
 
 ```bash
 tail -f ~/ss-bootstrap-python-iot/ss-bootstrap.log
@@ -45,62 +45,62 @@ tail -f ~/ss-bootstrap-python-iot/ss-bootstrap.log
 
 ---
 
-## 📁 Archivos principales
+## Main Files
 
-| Archivo                  | Propósito                                             |
+| File                     | Purpose                                               |
 |--------------------------|------------------------------------------------------|
-| `run.py`                 | Script principal con la lógica de ejecución          |
-| `run.sh`                 | Inicia el script y configura el servicio             |
-| `stop.sh`                | Detiene el proceso si está en ejecución              |
-| `updater.sh`             | Verifica cambios en el repositorio y reinicia        |
-| `install.sh`             | Script que automatiza todo el setup inicial          |
-| `setup-mac-service.sh`   | Configura el servicio de agente en macOS             |
-| `setup-linux-service.sh` | Configura el servicio de agente en Linux (systemd)   |
-| `stop-mac-service.sh`    | Detiene y elimina el servicio macOS                  |
-| `stop-linux-service.sh`  | Detiene y elimina el servicio systemd en Linux       |
-| `.gitignore`             | Ignora archivos de log y PID                         |
+| `run.py`                 | Main script containing the runtime logic             |
+| `run.sh`                 | Starts the script and configures the service         |
+| `stop.sh`                | Stops the process if it is running                   |
+| `updater.sh`             | Checks for repository changes and restarts the app   |
+| `install.sh`             | Automates the full initial setup                     |
+| `setup-mac-service.sh`   | Configures the agent service on macOS                |
+| `setup-linux-service.sh` | Configures the agent service on Linux (systemd)      |
+| `stop-mac-service.sh`    | Stops and removes the macOS service                  |
+| `stop-linux-service.sh`  | Stops and removes the Linux systemd service          |
+| `.gitignore`             | Ignores log and PID files                            |
 
 ---
 
-## 🛠️ Requisitos
+## Requirements
 
-- Raspberry Pi OS Lite (32-bit) o cualquier distribución Linux moderna
+- Raspberry Pi OS Lite (32-bit) or any modern Linux distribution
 - Python 3
-- Acceso a internet por Wi-Fi o Ethernet
-- Git instalado (ya viene por defecto en la imagen oficial)
+- Internet access through Wi-Fi or Ethernet
+- Git installed (included by default in the official image)
 
 ---
 
-## ✅ Ejemplo de salida (`ss-bootstrap.log`)
+## Example Output (`ss-bootstrap.log`)
 
 ```
-[2025-05-20 14:10:01] ✅ Sistema en ejecución V0.0.3
-[2025-05-20 14:11:01] ✅ Sistema en ejecución V0.0.3
+[2025-05-20 14:10:01] ✅ System running V0.0.3
+[2025-05-20 14:11:01] ✅ System running V0.0.3
 ```
 
 ---
 
-## 🧪 Próximos pasos
+## Next Steps
 
-Este repositorio está diseñado para ser extendido con:
-- Lectura de sensores reales (GPS, temperatura, movimiento)
-- Envío de datos a un backend vía HTTP o MQTT
-- Indicaciones físicas (LEDs, zumbadores, pantallas)
-
----
-
-## 📄 Licencia
-
-MIT — este proyecto es libre de usar, modificar y compartir.
+This repository is designed to be extended with:
+- Real sensor readings (GPS, temperature, motion)
+- Data delivery to a backend over HTTP or MQTT
+- Physical indicators (LEDs, buzzers, displays)
 
 ---
 
-## 🛠️ Scripts opcionales de mantenimiento
+## License
 
-Estos scripts pueden ser útiles durante pruebas manuales:
+MIT — this project is free to use, modify, and share.
 
-- `stop.sh`: Detiene el proceso principal si fue iniciado manualmente
-- `stop-mac-service.sh`: Elimina el servicio en macOS (`launchctl`)
-- `stop-linux-service.sh`: Elimina el servicio de usuario en Linux (`systemctl --user`)
+---
 
-⚠️ En producción no suelen usarse, ya que `updater.sh` reinicia correctamente el servicio al detectar cambios.
+## Optional Maintenance Scripts
+
+These scripts can be useful during manual testing:
+
+- `stop.sh`: Stops the main process if it was started manually
+- `stop-mac-service.sh`: Removes the macOS service (`launchctl`)
+- `stop-linux-service.sh`: Removes the Linux user service (`systemctl --user`)
+
+⚠️ In production these are usually unnecessary, since `updater.sh` restarts the service correctly when it detects changes.
