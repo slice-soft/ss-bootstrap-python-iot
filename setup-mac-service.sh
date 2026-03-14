@@ -40,4 +40,4 @@ EOF
 launchctl unload "$PLIST_PATH" 2>/dev/null
 launchctl load "$PLIST_PATH"
 
-echo "✅ Servicio macOS creado y cargado: $PLIST_PATH"
+echo "✅ macOS service created and loaded: $PLIST_PATH"

@@ -8,4 +8,4 @@ systemctl --user stop "$SERVICE_NAME"
 systemctl --user disable "$SERVICE_NAME"
 rm -f "$SERVICE_FILE"
 
-echo "🛑 Servicio detenido y eliminado: $SERVICE_FILE"
+echo "🛑 Service stopped and removed: $SERVICE_FILE"

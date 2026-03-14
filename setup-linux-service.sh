@@ -29,4 +29,4 @@ systemctl --user daemon-reload
 systemctl --user enable "$SERVICE_NAME"
 systemctl --user start "$SERVICE_NAME"
 
-echo "✅ Servicio de usuario creado y activado: $SERVICE_FILE"
+echo "✅ User service created and enabled: $SERVICE_FILE"
