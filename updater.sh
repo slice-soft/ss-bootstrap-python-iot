@@ -11,25 +11,25 @@ NEW=$(git rev-parse HEAD)
 timestamp="[$(date '+%Y-%m-%d %H:%M:%S')]"
 
 if [ "$OLD" != "$NEW" ]; then
-  echo "$timestamp 🔁 Actualización detectada."
+  echo "$timestamp 🔁 Update detected."
 
   OS_TYPE="$(uname)"
   if [[ "$OS_TYPE" == "Darwin" ]]; then
-    echo "$timestamp ♻️ Reiniciando servicio macOS..."
+    echo "$timestamp ♻️ Restarting macOS service..."
     launchctl stop com.slice.soft.ss-bootstrap
     launchctl start com.slice.soft.ss-bootstrap
   elif [[ "$OS_TYPE" == "Linux" ]]; then
-    echo "$timestamp ♻️ Reiniciando servicio Linux..."
+    echo "$timestamp ♻️ Restarting Linux service..."
     export XDG_RUNTIME_DIR="/run/user/$(id -u)"
     USERNAME=$(id -un)
     if loginctl show-user "$USERNAME" >/dev/null 2>&1; then
-      systemctl --user restart ss-bootstrap || echo "$timestamp ⚠️ No se pudo reiniciar. Probablemente no hay sesión activa."
+      systemctl --user restart ss-bootstrap || echo "$timestamp ⚠️ Could not restart. There is probably no active session."
     else
-      echo "$timestamp ⚠️ No hay sesión activa para $USERNAME. Reinicio fallido."
+      echo "$timestamp ⚠️ No active session found for $USERNAME. Restart failed."
     fi
   else
-    echo "$timestamp ❌ Sistema no soportado para reinicio automático"
+    echo "$timestamp ❌ Automatic restart is not supported on this system"
   fi
 else
-  echo "$timestamp ✅ Sin cambios"
+  echo "$timestamp ✅ No changes"
 fi

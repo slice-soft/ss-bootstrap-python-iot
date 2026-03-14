@@ -6,20 +6,20 @@ OS_TYPE="$(uname)"
 if [[ "$OS_TYPE" == "Darwin" ]]; then
   PLIST_PATH="$HOME/Library/LaunchAgents/com.slice.soft.ss-bootstrap.plist"
   if [ ! -f "$PLIST_PATH" ]; then
-    echo "🛠️ Configurando servicio macOS..."
+    echo "🛠️ Configuring macOS service..."
     ./setup-mac-service.sh
   fi
-  echo "🟢 Servicio macOS ya está instalado. Ejecutándose o se iniciará al reiniciar sesión."
+  echo "🟢 macOS service is already installed. It is running or will start on login."
   exit 0
 elif [[ "$OS_TYPE" == "Linux" ]]; then
   SERVICE_FILE="$HOME/.config/systemd/user/ss-bootstrap.service"
   if [ ! -f "$SERVICE_FILE" ]; then
-    echo "🛠️ Configurando servicio systemd de usuario en Linux..."
+    echo "🛠️ Configuring the Linux user systemd service..."
     ./setup-linux-service.sh
   fi
-  echo "🟢 Servicio Linux ya está instalado. Ejecutándose o se iniciará con el sistema."
+  echo "🟢 Linux service is already installed. It is running or will start with the system."
   exit 0
 else
-  echo "❌ Sistema operativo no soportado: $OS_TYPE"
+  echo "❌ Unsupported operating system: $OS_TYPE"
   exit 1
 fi
